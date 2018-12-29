@@ -7,7 +7,7 @@ module Hero
       #isolate_namespace Gcivic
 
       root=config.root
-      add=DIR["#{root}/lib/"]
+      add=Dir["#{root}/lib/"]
       puts "ALP #{root} adding #{add}"
       config.autoload_paths += add
       add=Dir["#{root}/app/**/"]
