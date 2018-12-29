@@ -3,11 +3,10 @@ module Hero
     class ToolsController < GcivicController
 
       def run
-        @tool = Hero::Gcivic::Tool.new(params['tool'])
+        @tool = Hero::Gcivic::Tool.new(params['hero_gcivic_tool'])
         @rows=@tool.representatives_rows
 
-        if params['commit']=='Save2CSV'
-          puts "CSV"
+        if params['button']=='csv'
           set_cache_buster
 
           filename=@tool.filename

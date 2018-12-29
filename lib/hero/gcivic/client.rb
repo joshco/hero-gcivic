@@ -6,8 +6,9 @@ module Hero
 
       def initialize(options={})
         @api_key=options[:api_key] || ENV['GCIVIC_API_KEY']
+        logging=(options[:logging] == true) || (ENV['GCIVIC_LOGGING']=='true')
         @conn=Faraday.new(url: CIVIC_ROOT) do |f|
-          f.response :logger
+          f.response :logger if logging
           f.response :json
           f.adapter Faraday.default_adapter
         end
@@ -107,8 +108,6 @@ module Hero
 
       def divisions(query=nil)
         query||='country us'
-
-        puts "FOOggg"
         (@conn.get "divisions", {query: query, key: @api_key}).body['results']
       end
 

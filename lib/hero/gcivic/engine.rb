@@ -4,10 +4,10 @@ module Hero
     # Your code goes here...
     #
     class Engine < ::Rails::Engine
-      isolate_namespace Gcivic
+      #isolate_namespace Gcivic
 
       root=config.root
-      add=Dir["#{root}/lib/**/"]
+      add=Dir["#{root}/lib/"]
       puts "ALP #{root} adding #{add}"
       config.autoload_paths += add
       add=Dir["#{root}/app/**/"]
