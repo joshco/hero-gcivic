@@ -8,7 +8,6 @@ module Hero
 
       root=config.root
       add=Dir["#{root}/lib/"]
-      puts "ALP #{root} adding #{add}"
       config.autoload_paths += add
       add=Dir["#{root}/app/**/"]
       config.autoload_paths += add
