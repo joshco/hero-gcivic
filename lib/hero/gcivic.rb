@@ -1,13 +1,22 @@
 require 'faraday'
+require 'faraday_middleware'
 require 'uri'
 require 'json'
 require 'pp'
 require 'csv'
-require "hero/gcivic/version"
-require "hero/gcivic/client"
+require 'rails'
+require "action_controller/railtie"
+require 'active_model'
 
 module Hero
   module Gcivic
-    # Your code goes here...
+
+    if defined?(Rails)
+      puts 'engine'
+      require 'hero/gcivic/engine'
+    else
+      puts 'ruby'
+      require 'hero/gcivic/base'
+    end
   end
 end

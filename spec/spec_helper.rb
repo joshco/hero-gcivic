@@ -2,6 +2,7 @@ require "bundler/setup"
 require 'dotenv'
 Dotenv.load(".gem.env")
 require "hero/gcivic"
+require "hero/gcivic/base"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

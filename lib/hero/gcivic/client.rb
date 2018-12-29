@@ -5,9 +5,10 @@ module Hero
       CIVIC_ROOT="https://www.googleapis.com/civicinfo/v2/"
 
       def initialize(options={})
-        @api_key=options[:api_key]
+        @api_key=options[:api_key] || ENV['GCIVIC_API_KEY']
         @conn=Faraday.new(url: CIVIC_ROOT) do |f|
           f.response :logger
+          f.response :json
           f.adapter Faraday.default_adapter
         end
 
@@ -29,7 +30,7 @@ module Hero
           raise "Unsupported query"
         end
 
-        reps=@conn.get url, params
+        reps=(@conn.get url, params).body
 
       end
 
@@ -107,7 +108,8 @@ module Hero
       def divisions(query=nil)
         query||='country us'
 
-        @conn.get "divisions", {query: query, key: @api_key}
+        puts "FOOggg"
+        (@conn.get "divisions", {query: query, key: @api_key}).body['results']
       end
 
     end

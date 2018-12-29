@@ -12,7 +12,9 @@ RSpec.describe Hero::Gcivic do
     address="300 Bryant Street NW,Washington,DC,20001"
 
 
-    puts @client.representatives(address: address).body
+    @client2=Hero::Gcivic::Client.new
+
+    puts @client2.representatives(address: address).body
   end
 
   it "reps by ocdid" do

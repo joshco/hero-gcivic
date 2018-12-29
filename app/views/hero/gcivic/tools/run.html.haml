@@ -1,0 +1,34 @@
+%h1 Query Representatives
+
+= simple_form_for(@tool, url: 'run', html: {class: 'form-inline gcivic'}, wrapper: :inline_form) do |f|
+  = f.error_notification
+
+
+  = f.input :ocdid, collection: @tool.divisions_for_select, label: "Pick a division"
+  &nbsp;
+  = f.input :recurse, as: :boolean
+  &nbsp;
+  = f.submit "View", class: 'btn btn-primary'
+  &nbsp;
+  = f.submit "Save2CSV", class: 'btn btn-primary'
+
+
+%table.table.table-striped
+  %thead
+    - @tool.headers.each do |h|
+      %th=h
+  %tbody
+    - @rows.each do |row|
+      %tr
+        - row.each_with_index do |col,i|
+          %td
+            %span{title: col, "data-toggle": "tooltip"}
+              - if i==1
+                = col.split('/').last
+              - else
+                =truncate(col, length: 15)
+
+:javascript
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
